@@ -13,7 +13,7 @@ env:
   BUILD_VERSION: "3.21.3"
   DOCKER_CLI_EXPERIMENTAL: enabled
   REPOSITORY_DOCKERHUB: securitybits/${{ github.workflow }} 
-  REPOSITORY_GHCR: ${{ github.actor }}/${{ github.workflow }} 
+  REPOSITORY_GHCR: securitybits-io/${{ github.workflow }} 
 
 permissions: read-all
 
