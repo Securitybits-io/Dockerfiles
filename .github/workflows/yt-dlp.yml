@@ -1,16 +1,18 @@
-name: alpine
+name: yt-dlp
 
 on:
   push:
     branches: 
       - main
     paths:
-      - templates/alpine/*
-      - .github/workflows/alpine.yml
+      - yt-dlp/*
+      - .github/workflows/yt-dlp.yml
   workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 1"
 
 env:
-  BUILD_VERSION: "3.21.3"
+  BUILD_VERSION: "2025.01.26"
   DOCKER_CLI_EXPERIMENTAL: enabled
   REPOSITORY_DOCKERHUB: securitybits/${{ github.workflow }} 
   REPOSITORY_GHCR: securitybits-io/${{ github.workflow }} 
@@ -40,6 +42,7 @@ jobs:
             ghcr.io:443
             github.com:443
             pkg-containers.githubusercontent.com:443
+            objects.githubusercontent.com:443
             production.cloudflare.docker.com:443
             proxy.golang.org:443
             registry-1.docker.io:443
@@ -78,15 +81,14 @@ jobs:
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v1.12.0
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}      
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}      
 
       - name: Build and push
         uses: docker/build-push-action@ca877d9245402d1537745e0e356eab47c3520991 # v2.8.0
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          context: templates/${{ github.workflow }}
-          #platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
-          platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6,linux/386,linux/ppc64le,linux/riscv64,linux/s390x
+          context: ${{ github.workflow }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6,linux/s390x
           build-args: |
             BUILD_VERSION
           sbom: true
