@@ -1,4 +1,4 @@
-FROM alpine:3.21.2
+FROM ghcr.io/securitybits-io/alpine:3.21.3
 
 ARG DUMB_INIT_VERSION=1.2.5
 
