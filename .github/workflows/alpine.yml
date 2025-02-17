@@ -12,7 +12,8 @@ on:
 env:
   BUILD_VERSION: "3.21.3"
   DOCKER_CLI_EXPERIMENTAL: enabled
-  REPOSITORY: securitybits/${{ github.workflow }} 
+  REPOSITORY_DOCKERHUB: securitybits/${{ github.workflow }} 
+  REPOSITORY_GHCR: ${{ github.actor }}/${{ github.workflow }} 
 
 permissions: read-all
 
@@ -94,7 +95,7 @@ jobs:
           cache-to: type=gha, scope=${{ github.workflow }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           tags: |
-            docker.io/${{ env.REPOSITORY }}:${{ env.BUILD_VERSION }}
-            docker.io/${{ env.REPOSITORY }}:latest
-            ghcr.io/${{ env.REPOSITORY }}:${{ env.BUILD_VERSION }}
-            ghcr.io/${{ env.REPOSITORY }}:latest
+            docker.io/${{ env.REPOSITORY_DOCKERHUB }}:${{ env.BUILD_VERSION }}
+            docker.io/${{ env.REPOSITORY_DOCKERHUB }}:latest
+            ghcr.io/${{ env.REPOSITORY_GHCR }}:${{ env.BUILD_VERSION }}
+            ghcr.io/${{ env.REPOSITORY_GHCR }}:latest
