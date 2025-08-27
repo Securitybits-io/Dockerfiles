@@ -18,6 +18,7 @@ ARG UID=1000
 RUN useradd -u ${UID} -m -s /bin/bash ${USERNAME}
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/${USERNAME}"
 RUN usermod -U ${USERNAME}
+RUN passwd -d ${USERNAME}
 
 # Harden sshd a bit and ensure it runs
 RUN mkdir -p /var/run/sshd /etc/ssh/keys && \
