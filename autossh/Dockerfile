@@ -15,13 +15,13 @@ RUN apk add --no-cache \
 ARG USERNAME=tunnel
 ARG UID=1000
 RUN useradd -u ${UID} -m -s /bin/bash ${USERNAME}
-RUN echo '${USERNAME} ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/tunnel
+RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/${USERNAME}"
 
 # Harden sshd a bit and ensure it runs
 RUN mkdir -p /var/run/sshd /etc/ssh/keys && \
     sed -i \
       -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' \
-      -e 's/^#\?PermitRootLogin.*/PermitRootLogin no/' \
+      -e 's/^#\?PermitRootLogin.*/PermitRootLogin yes/' \
       -e 's/^#\?ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' \
       -e 's/^#\?PubkeyAuthentication.*/PubkeyAuthentication yes/' \
       -e 's/^#\?X11Forwarding.*/X11Forwarding no/' \
@@ -34,14 +34,6 @@ ENV AUTOSSH_GATETIME=0 \
     AUTOSSH_FIRST_POLL=30 \
     AUTOSSH_LOGLEVEL=7
 
-# Required at runtime:
-#   REMOTE_SSH="user@bastion.example.com"
-#   REMOTE_PORT="22222"        (remote port to open on bastion)
-# Optional:
-#   REMOTE_SSH_PORT="22"       (SSH port on bastion)
-#   AUTOSSH_KEY_PATH="/run/secrets/id_rsa"  (private key to bastion)
-#   AUTHORIZED_KEYS="ssh-ed25519 AAAA... comment" (or mount /run/secrets/authorized_keys)
-#   SSH_OPTS="-o Compression=yes"   (additional ssh opts to bastion)
 ENV REMOTE_SSH="" \
     REMOTE_PORT="" \
     REMOTE_SSH_PORT="22" \
