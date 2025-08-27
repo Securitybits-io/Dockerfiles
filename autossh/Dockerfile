@@ -9,6 +9,7 @@ RUN apk add --no-cache \
               sudo \
               curl \
               nmap \
+              nano \
               && update-ca-certificates
 
 # Create unprivileged user for SSH login
@@ -16,7 +17,7 @@ ARG USERNAME=tunnel
 ARG UID=1000
 RUN useradd --disabled-password -u ${UID} -m -s /bin/bash ${USERNAME}
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/${USERNAME}"
-RUN 
+RUN usermod -U ${USERNAME}
 
 # Harden sshd a bit and ensure it runs
 RUN mkdir -p /var/run/sshd /etc/ssh/keys && \
