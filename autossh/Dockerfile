@@ -3,7 +3,6 @@ FROM alpine:3.20
 # Install OpenSSH server + AutoSSH
 RUN apk add --no-cache \
               openssh \
-              openssh-server-pam \
               autossh bash \
               shadow \
               ca-certificates \
