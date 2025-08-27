@@ -15,7 +15,7 @@ RUN apk add --no-cache \
 # Create unprivileged user for SSH login
 ARG USERNAME=tunnel
 ARG UID=1000
-RUN useradd --disabled-password -u ${UID} -m -s /bin/bash ${USERNAME}
+RUN useradd -u ${UID} -m -s /bin/bash ${USERNAME}
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/${USERNAME}"
 RUN usermod -U ${USERNAME}
 
