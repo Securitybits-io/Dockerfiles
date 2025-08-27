@@ -23,7 +23,6 @@ RUN mkdir -p /var/run/sshd /etc/ssh/keys && \
     sed -i \
       -e 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' \
       -e 's/^#\?PermitRootLogin.*/PermitRootLogin no/' \
-      -e 's/^#\?UsePAM.*/UsePAM no/' \
       -e 's/^#\?ChallengeResponseAuthentication.*/ChallengeResponseAuthentication no/' \
       -e 's/^#\?PubkeyAuthentication.*/PubkeyAuthentication yes/' \
       -e 's/^#\?X11Forwarding.*/X11Forwarding no/' \
