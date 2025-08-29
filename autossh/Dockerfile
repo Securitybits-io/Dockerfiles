@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM ghcr.io/securitybits-io/alpine:3.21.3
 
 # Install OpenSSH server + AutoSSH
 RUN apk add --no-cache \
