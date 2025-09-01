@@ -2,7 +2,7 @@
 set -euo pipefail
 
 USERNAME="${USERNAME:-tunnel}"
-
+REMOTE_PROXY_PORT="${REMOTE_PROXY_PORT:-9050}"
 # 1) Generate host keys if missing
 if ! ls /etc/ssh/ssh_host_*key >/dev/null 2>&1; then
   echo "[init] Generating SSH host keys…"
@@ -61,6 +61,7 @@ echo "       (bastion port ${REMOTE_SSH_PORT})"
 exec autossh -M 0 -N \
   -p "${REMOTE_SSH_PORT}" \
   -R "${REMOTE_PORT}:${TARGET}" \
+  -D "localhost:${REMOTE_PROXY_PORT}" \
   ${SSH_OPTS} \
   "${SSH_CMD_OPTS[@]}" \
   "${REMOTE_SSH}"

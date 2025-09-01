@@ -7,6 +7,7 @@ docker run --rm \
   -e REMOTE_SSH="tunnel@<IPADRESS TO BASTION>" \
   -e REMOTE_PORT="25022" \
   -e REMOTE_SSH_PORT="22" \
+  -e REMOTE_PROXY_PORT="9050" \ # Optional, defaults to 9050/tcp
   -e AUTOSSH_KEY_PATH="/run/secrets/id_rsa" \
   -e AUTHORIZED_KEYS="<THE PUBLIC SSH KEY FOR AUTHING TO TUNNEL>" \
   -v $(pwd)/tunnel.id_rsa:/run/secrets/id_rsa \
