@@ -12,7 +12,7 @@ on:
     - cron: "0 8 * * 1"
 
 env:
-  BUILD_VERSION: "2025.01.26"
+  BUILD_VERSION: "2026.08.19"
   DOCKER_CLI_EXPERIMENTAL: enabled
   REPOSITORY_DOCKERHUB: securitybits/${{ github.workflow }} 
   REPOSITORY_GHCR: securitybits-io/${{ github.workflow }} 
