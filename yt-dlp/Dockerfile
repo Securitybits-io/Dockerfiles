@@ -16,6 +16,11 @@ RUN set -x \
         py3-mutagen \
         libstdc++
 
+RUN apk add --no-cache --virtual .build-deps \
+    build-base \
+    python3-dev \
+    libffi-dev
+
 RUN python3 -m pip install \
         --break-system-packages \
         --no-cache-dir \
@@ -25,6 +30,8 @@ RUN curl -Lo /usr/local/bin/yt-dlp \
  "https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/yt-dlp" \
  && chmod a+rx /usr/local/bin/yt-dlp \
  && apk del curl
+
+RUN apk del .build-deps
 
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
