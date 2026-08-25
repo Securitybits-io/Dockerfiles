@@ -14,7 +14,9 @@ RUN set -x \
         python3 \
         py3-pip \
         py3-mutagen \
-        libstdc++
+        libstdc++ \
+        libgcc
+
 
 RUN apk add --no-cache --virtual .build-deps \
     build-base \
@@ -36,7 +38,11 @@ RUN apk del .build-deps
 ENV SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 RUN dumb-init yt-dlp --version
-RUN yt-dlp --list-impersonate-targets
+
+RUN python3 -c "import curl_cffi; print('curl_cffi:', curl_cffi.__version__)"
+RUN python3 -c "import curl_cffi.requests; print('curl_cffi requests OK')"
+
+RUN yt-dlp -v --list-impersonate-targets
 
 ENTRYPOINT ["dumb-init", "yt-dlp"]
 CMD ["--help"]
