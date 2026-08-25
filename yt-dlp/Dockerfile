@@ -14,8 +14,9 @@ RUN set -x \
         python3 \
         py3-pip \
         py3-mutagen \
-        libstdc++ \
- && python3 -m pip install \
+        libstdc++
+        
+RUN python3 -m pip install \
         --break-system-packages \
         --no-cache-dir \
         curl_cffi==0.15
