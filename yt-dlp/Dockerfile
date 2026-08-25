@@ -15,11 +15,11 @@ RUN set -x \
         py3-pip \
         py3-mutagen \
         libstdc++
-        
+
 RUN python3 -m pip install \
         --break-system-packages \
         --no-cache-dir \
-        curl_cffi==0.15
+        curl_cffi==0.15.0
 
 RUN curl -Lo /usr/local/bin/yt-dlp \
  "https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/yt-dlp" \
