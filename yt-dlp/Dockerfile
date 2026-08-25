@@ -18,9 +18,10 @@ RUN set -x \
  && python3 -m pip install \
         --break-system-packages \
         --no-cache-dir \
-        "curl_cffi>=0.10,<0.16" \
- && curl -Lo /usr/local/bin/yt-dlp \
-        "https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/yt-dlp" \
+        curl_cffi==0.15
+
+RUN curl -Lo /usr/local/bin/yt-dlp \
+ "https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/yt-dlp" \
  && chmod a+rx /usr/local/bin/yt-dlp \
  && apk del curl
 
