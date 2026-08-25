@@ -15,6 +15,9 @@ RUN set -x \
         ffmpeg \
         python3 \
         py3-mutagen \
+        libstdc++ \
+ && pip install --no-cache-dir --upgrade pip \
+ && pip install --no-cache-dir curl_cffi \
     # Install youtube-dl
  && curl -Lo /usr/local/bin/yt-dlp https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/yt-dlp \
  #&& curl -Lo SHA2-256SUMS https://github.com/yt-dlp/yt-dlp/releases/download/${BUILD_VERSION}/SHA2-256SUMS \
